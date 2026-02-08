@@ -1,8 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
   const { getCartCount } = useCart();
+  const { user, logout } = useAuth();
   const cartCount = getCartCount();
 
   return (
@@ -27,6 +29,28 @@ const Navbar = () => {
                 )}
               </Link>
             </li>
+            {user ? (
+              <>
+                <li className="nav-item">
+                  <span className="nav-link">Hi, {user.name}</span>
+                </li>
+                <li className="nav-item">
+                  <Link to="/admin" className="nav-link" style={{ color: 'var(--primary-color)' }}>Admin</Link>
+                </li>
+                <li className="nav-item">
+                  <button onClick={logout} className="btn-logout">Logout</button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+                <li>
+                  <Link to="/register">Register</Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

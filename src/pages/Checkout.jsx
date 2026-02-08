@@ -7,7 +7,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const { cart, getCartTotal, clearCart } = useCart();
   const [isSubmitted, setIsSubmitted] = useState(false);
-  
+
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -27,7 +27,7 @@ const Checkout = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Validasi form
     if (!formData.fullName || !formData.email || !formData.phone || !formData.address) {
       alert('Mohon lengkapi semua data yang diperlukan!');
@@ -36,7 +36,7 @@ const Checkout = () => {
 
     // Simulasi proses checkout
     setIsSubmitted(true);
-    
+
     // Clear cart setelah 2 detik
     setTimeout(() => {
       clearCart();
@@ -50,8 +50,8 @@ const Checkout = () => {
           <div className="cart-empty">
             <h2>Keranjang Kosong</h2>
             <p>Silakan tambahkan produk ke keranjang terlebih dahulu</p>
-            <button 
-              onClick={() => navigate('/products')} 
+            <button
+              onClick={() => navigate('/products')}
               className="btn-primary"
             >
               Mulai Belanja
@@ -70,8 +70,8 @@ const Checkout = () => {
             <h2>✅ Pesanan Berhasil!</h2>
             <p>Terima kasih telah berbelanja. Pesanan Anda sedang diproses.</p>
             <p>Nomor pesanan: #{Math.random().toString(36).substr(2, 9).toUpperCase()}</p>
-            <button 
-              onClick={() => navigate('/')} 
+            <button
+              onClick={() => navigate('/')}
               className="btn-primary"
             >
               Kembali ke Beranda
@@ -86,11 +86,11 @@ const Checkout = () => {
     <div className="checkout-section">
       <div className="container">
         <h1 className="section-title">Checkout</h1>
-        
+
         <div className="checkout-container">
           <form className="checkout-form" onSubmit={handleSubmit}>
             <h2>Data Pembeli</h2>
-            
+
             <div className="form-group">
               <label htmlFor="fullName">Nama Lengkap *</label>
               <input
@@ -100,6 +100,7 @@ const Checkout = () => {
                 value={formData.fullName}
                 onChange={handleChange}
                 required
+                className="form-control"
               />
             </div>
 
@@ -112,6 +113,7 @@ const Checkout = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
+                className="form-control"
               />
             </div>
 
@@ -124,6 +126,7 @@ const Checkout = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 required
+                className="form-control"
               />
             </div>
 
@@ -135,6 +138,8 @@ const Checkout = () => {
                 value={formData.address}
                 onChange={handleChange}
                 required
+                className="form-control"
+                rows="3"
               />
             </div>
 
@@ -147,6 +152,7 @@ const Checkout = () => {
                 value={formData.city}
                 onChange={handleChange}
                 required
+                className="form-control"
               />
             </div>
 
@@ -158,6 +164,7 @@ const Checkout = () => {
                 name="postalCode"
                 value={formData.postalCode}
                 onChange={handleChange}
+                className="form-control"
               />
             </div>
 
@@ -168,13 +175,7 @@ const Checkout = () => {
                 name="paymentMethod"
                 value={formData.paymentMethod}
                 onChange={handleChange}
-                style={{ 
-                  width: '100%', 
-                  padding: '0.8rem',
-                  border: '1px solid #bdc3c7',
-                  borderRadius: '5px',
-                  fontSize: '1rem'
-                }}
+                className="form-control"
               >
                 <option value="transfer">Transfer Bank</option>
                 <option value="cod">Cash on Delivery</option>

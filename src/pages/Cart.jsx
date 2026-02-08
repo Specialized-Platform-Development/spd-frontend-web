@@ -4,11 +4,11 @@ import { formatPrice } from '../data/products';
 
 const Cart = () => {
   const navigate = useNavigate();
-  const { 
-    cart, 
-    removeFromCart, 
-    updateQuantity, 
-    getCartTotal 
+  const {
+    cart,
+    removeFromCart,
+    updateQuantity,
+    getCartTotal
   } = useCart();
 
   const handleQuantityChange = (productId, newQuantity) => {
@@ -44,10 +44,10 @@ const Cart = () => {
     <div className="cart-section">
       <div className="container">
         <h1 className="section-title">Keranjang Belanja</h1>
-        
+
         <div className="cart-items">
           {cart.map(item => (
-            <div key={item.id} className="cart-item">
+            <div key={item._id} className="cart-item">
               <div className="cart-item-image">
                 {item.image}
               </div>
@@ -56,29 +56,29 @@ const Cart = () => {
                 <p className="cart-item-price">{formatPrice(item.price)}</p>
                 <div className="cart-item-actions">
                   <div className="quantity-selector">
-                    <button 
+                    <button
                       className="quantity-btn"
-                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                      onClick={() => updateQuantity(item._id, item.quantity - 1)}
                     >
                       -
                     </button>
-                    <input 
+                    <input
                       type="number"
                       className="quantity-input"
                       value={item.quantity}
-                      onChange={(e) => handleQuantityChange(item.id, e.target.value)}
+                      onChange={(e) => handleQuantityChange(item._id, e.target.value)}
                       min="1"
                     />
-                    <button 
+                    <button
                       className="quantity-btn"
-                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      onClick={() => updateQuantity(item._id, item.quantity + 1)}
                     >
                       +
                     </button>
                   </div>
-                  <button 
+                  <button
                     className="btn-remove"
-                    onClick={() => handleRemove(item.id, item.name)}
+                    onClick={() => handleRemove(item._id, item.name)}
                   >
                     Hapus
                   </button>
@@ -104,7 +104,7 @@ const Cart = () => {
             <span>Total:</span>
             <span>{formatPrice(getCartTotal())}</span>
           </div>
-          <button 
+          <button
             className="btn-checkout"
             onClick={() => navigate('/checkout')}
           >
